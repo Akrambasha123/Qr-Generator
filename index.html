@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stylish QR Code Generator</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Generate QR codes quickly and easily with this stylish QR Code Generator. Perfect for sharing links or text in an instant!">
+    <meta name="keywords" content="QR Code Generator, QR Code, Generate QR, Stylish QR Code">
+    <meta name="author" content="A Akram Basha">
+
+    <!-- Social Media Meta Tags -->
+    <meta property="og:title" content="Stylish QR Code Generator">
+    <meta property="og:description" content="Create QR codes instantly! Enter text or a URL, and generate a QR code for sharing.">
+    <meta property="og:image" content="link-to-your-image.png"> <!-- replace with a URL to an image for social sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourwebsite.com"> <!-- replace with your website URL -->
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Stylish QR Code Generator">
+    <meta name="twitter:description" content="Generate QR codes instantly and share your text or URL. Quick and easy to use!">
+    <meta name="twitter:image" content="link-to-your-image.png"> <!-- replace with a URL to an image for social sharing -->
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        .container {
+            text-align: center;
+            max-width: 400px;
+            padding: 30px;
+            border-radius: 10px;
+            background: linear-gradient(145deg, #ffffff, #e6e6e6);
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2), -4px -4px 8px rgba(255, 255, 255, 0.7);
+        }
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            box-shadow: inset 4px 4px 8px #d1d1d1, inset -4px -4px 8px #ffffff;
+            transition: 0.3s;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            box-shadow: inset 4px 4px 8px #bdbdbd, inset -4px -4px 8px #ffffff;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #qrCanvas {
+            margin-top: 20px;
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        .message {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+</head>
+<body>
+
+<div class="container" id="qrContainer">
+    <h2>Generate Your QR Code</h2>
+    <p style="color: #666;">Enter text or a URL below to generate a QR code:</p>
+    <div class="input-group">
+        <input type="text" id="inputText" placeholder="Enter text or URL here">
+    </div>
+    <button onclick="generateQRCode()">Generate QR Code</button>
+    <canvas id="qrCanvas"></canvas>
+    <div class="message" id="message"></div>
+</div>
+
+<script>
+    function generateQRCode() {
+        const inputText = document.getElementById("inputText").value.trim();
+        const message = document.getElementById("message");
+        const qrCanvas = document.getElementById("qrCanvas");
+
+        if (!inputText) {
+            message.textContent = "Please enter some text or a URL!";
+            message.style.color = "red";
+            qrCanvas.style.display = "none";
+            return;
+        }
+
+        message.textContent = "";
+        message.style.color = "green";
+
+        const qr = new QRious({
+            element: qrCanvas,
+            value: inputText,
+            size: 200,
+        });
+
+        qrCanvas.style.display = "block";
+        message.textContent = "QR c
